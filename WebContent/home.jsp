@@ -33,6 +33,10 @@
 		});
 	}
 
+	function sortByPrice() {
+		
+	}
+
 </script>
 
 </head>
@@ -40,9 +44,9 @@
 	<h1>Product</h1>
 	
 	<div class="buttons">
-		<button type="button" >처음으로</button>
-		<button type="button" >가격순</button>
-		<button type="button" >판매순</button>
+		<button>처음으로</button>
+		<button onclick="sortByPrice()">가격순</button>
+		<button>판매순</button>
 	</div>
 	<div class="tables">
 		<table border="1">
