@@ -25,6 +25,8 @@ public class ProductRepository {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
+
+	
 	
 	public int deleteById(int id) {
 		final String SQL = "DELETE FROM product WHERE id = ?";
@@ -44,12 +46,26 @@ public class ProductRepository {
 	}
 	
 	
-	public List<Product> findAll() {
-		final String SQL = "SELECT id,name,type,price,count FROM product";
+	
+	public List<Product> findAll(SortBy sortBy) {
+		String sql = null;
+		
+		switch (sortBy) {
+			case	id: 
+				sql = "SELECT id,name,type,price,count FROM product ORDER BY id ASC";
+				break;
+			case 	price:
+				sql = "SELECT id,name,type,price,count FROM product ORDER BY price DESC";
+				break;
+			case	count:
+				sql = "SELECT id,name,type,price,count FROM product ORDER BY count DESC";
+				break;
+		}
+		
 		
 		try {
 			conn = DBConn.getConnection();
-			pstmt = conn.prepareStatement(SQL);
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			List<Product> products = new ArrayList<>();
@@ -71,5 +87,10 @@ public class ProductRepository {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	
+	public enum SortBy {
+		id,price,count
 	}
 }

@@ -2,6 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+
+	request.setCharacterEncoding("utf-8");
+
+%>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +15,8 @@
 <title>Product 메인 페이지</title>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+	
+
 	function deleteById(id) {
 		console.log("deleteById : " + id);
 		$.ajax({
@@ -33,8 +40,46 @@
 		});
 	}
 
+	var tableHead = 
+		"<tr>" +
+			"<th>번호</th>" +
+			"<th>이름</th>" +
+			"<th>종류</th>" +
+			"<th>가격</th>" +
+			"<th>판매수</th>" +
+		"</tr>";
+
 	function sortByPrice() {
-		
+		$.ajax({
+			type : "GET",
+			url : "/product/prod?cmd=priceSortProc",
+			contentType : "application/x-www-form-urlencoded; charset=utf-8", // "application/json",
+			dataType : "json"
+		})
+		.done(function(result) {
+			var tableItem = $("table");
+			tableItem.empty();
+			tableItem.append(tableHead);
+
+			for (var p of result) {
+				let trItem = "<tr>";
+				trItem += "<td>" + p.id + "</td>";
+				trItem += "<td>" + p.name + "</td>";
+				trItem += "<td>" + p.type + "</td>";
+				trItem += "<td>" + p.price + "</td>";
+				trItem += "<td>" + p.count + "</td>";
+				trItem += "</tr>";
+
+				tableItem.append(trItem);
+				
+				trItem = "";
+				
+			}
+			console.log("sortBy : tableItem : ", tableItem);
+		})
+		.fail(function(error) {
+
+		});
 	}
 
 </script>
@@ -57,6 +102,7 @@
 				<th>가격</th>
 				<th>판매수</th>
 			</tr>
+	
 	<c:forEach var="p" items="${products}">
 			<tr id="tr-${p.id}">
 				<td>${p.id}</td>
@@ -67,6 +113,7 @@
 				<td><button onclick="deleteById(${p.id})">삭제</button></td>
 			</tr>
 	</c:forEach>
+	
 		</table>
 	</div>
 </body>
