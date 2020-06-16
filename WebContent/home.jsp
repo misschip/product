@@ -14,106 +14,41 @@
 <meta charset="UTF-8">
 <title>Product 메인 페이지</title>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-	
-
-	function deleteById(id) {
-		console.log("deleteById : " + id);
-		$.ajax({
-			type : "POST",
-			url : "/product/prod?cmd=delete",
-			data : "id=" + id,
-			contentType : "application/x-www-form-urlencoded; charset=utf-8",
-			dataType : "text"
-		})
-		.done(function(result) {
-			if (result == 1) {
-				alert("삭제 성공");
-				var trItem = $("#tr-"+id);
-				trItem.remove();
-			} else {
-				alert("삭제 실패");
-			}
-		})
-		.fail(function(error) {
-				alert("삭제 실패");
-		});
-	}
-
-	var tableHead = 
-		"<tr>" +
-			"<th>번호</th>" +
-			"<th>이름</th>" +
-			"<th>종류</th>" +
-			"<th>가격</th>" +
-			"<th>판매수</th>" +
-		"</tr>";
-
-	function sortByPrice() {
-		$.ajax({
-			type : "GET",
-			url : "/product/prod?cmd=priceSortProc",
-			contentType : "application/x-www-form-urlencoded; charset=utf-8", // "application/json",
-			dataType : "json"
-		})
-		.done(function(result) {
-			var tableItem = $("table");
-			tableItem.empty();
-			tableItem.append(tableHead);
-
-			for (var p of result) {
-				let trItem = "<tr>";
-				trItem += "<td>" + p.id + "</td>";
-				trItem += "<td>" + p.name + "</td>";
-				trItem += "<td>" + p.type + "</td>";
-				trItem += "<td>" + p.price + "</td>";
-				trItem += "<td>" + p.count + "</td>";
-				trItem += "</tr>";
-
-				tableItem.append(trItem);
-				
-				trItem = "";
-				
-			}
-			console.log("sortBy : tableItem : ", tableItem);
-		})
-		.fail(function(error) {
-
-		});
-	}
-
-</script>
+<script src="js/product.js"></script>
 
 </head>
 <body>
 	<h1>Product</h1>
 	
 	<div class="buttons">
-		<button>처음으로</button>
-		<button onclick="sortByPrice()">가격순</button>
-		<button>판매순</button>
+		<button onclick="sortBy('id')">처음으로</button>
+		<button onclick="sortBy('price')">가격순</button>
+		<button onclick="sortBy('count')">판매순</button>
 	</div>
 	<div class="tables">
 		<table border="1">
-			<tr>
-				<th>번호</th>
-				<th>이름</th>
-				<th>종류</th>
-				<th>가격</th>
-				<th>판매수</th>
-			</tr>
-	
-	<c:forEach var="p" items="${products}">
-			<tr id="tr-${p.id}">
-				<td>${p.id}</td>
-				<td>${p.name}</td>
-				<td>${p.type}</td>
-				<td>${p.price}</td>
-				<td>${p.count}</td>
-				<td><button onclick="deleteById(${p.id})">삭제</button></td>
-			</tr>
-	</c:forEach>
-	
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>이름</th>
+					<th>종류</th>
+					<th>가격</th>
+					<th>판매수</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<c:forEach var="p" items="${products}">
+					<tr id="tr-${p.id}">
+						<td>${p.id}</td>
+						<td>${p.name}</td>
+						<td>${p.type}</td>
+						<td>${p.price}</td>
+						<td>${p.count}</td>
+						<td><button onclick="deleteById(${p.id})">삭제</button></td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 	</div>
 </body>

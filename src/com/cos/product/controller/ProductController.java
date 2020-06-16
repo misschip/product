@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.cos.product.action.Action;
 import com.cos.product.action.DeleteAction;
 import com.cos.product.action.HomeAction;
-import com.cos.product.action.PriceSortProcAction;
+import com.cos.product.action.SortProcAction;
 
 
 @WebServlet("/prod")
@@ -40,8 +40,8 @@ public class ProductController extends HttpServlet {
 			return new HomeAction();
 		} else if (command.equals("delete")) {
 			return new DeleteAction();
-		} else if (command.equals("priceSortProc")) {
-			return new PriceSortProcAction();
+		} else if (command.equals("sortProc")) {
+			return new SortProcAction();
 		}
 		
 		return null;
