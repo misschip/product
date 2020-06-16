@@ -13,20 +13,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Product 메인 페이지</title>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="js/product.js"></script>
+	  <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
 </head>
 <body>
 	<h1>Product</h1>
 	
 	<div class="buttons">
-		<button onclick="sortBy('id')">처음으로</button>
-		<button onclick="sortBy('price')">가격순</button>
-		<button onclick="sortBy('count')">판매순</button>
+		<button onclick="sortBy('id')" class="waves-effect waves-light btn">처음으로</button>
+		<button onclick="sortBy('price')" class="waves-effect waves-light btn">가격순</button>
+		<button onclick="sortBy('count')" class="waves-effect waves-light btn">판매순</button>
 	</div>
 	<div class="tables">
-		<table border="1">
+		<table class="striped">
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -51,6 +53,9 @@
 			</tbody>
 		</table>
 	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script src="js/product.js"></script>
 </body>
 </html>
 

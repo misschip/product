@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 	function deleteById(id) {
 		console.log("deleteById : " + id);
 		$.ajax({
@@ -48,12 +46,13 @@
 			
 
 			for (var p of result) {
-				let trItem = "<tr>";
+				let trItem = `<tr id=tr-${p.id}>`;
 				trItem += "<td>" + p.id + "</td>";
 				trItem += "<td>" + p.name + "</td>";
 				trItem += "<td>" + p.type + "</td>";
 				trItem += "<td>" + p.price + "</td>";
 				trItem += "<td>" + p.count + "</td>";
+				trItem += `<td><button onclick="deleteById(${p.id})">삭제</button></td>`;
 				trItem += "</tr>";
 
 				tbodyItem.append(trItem);
