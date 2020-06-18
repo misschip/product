@@ -47,7 +47,7 @@
 						<td>${p.type}</td>
 						<td>${p.price}</td>
 						<td>${p.count}</td>
-						<td><button onclick="deleteById(${p.id})">삭제</button></td>
+						<td><button onclick="deleteById(${p.id})" class="waves-effect waves-light btn">삭제</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

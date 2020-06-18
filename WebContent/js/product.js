@@ -52,7 +52,7 @@
 				trItem += "<td>" + p.type + "</td>";
 				trItem += "<td>" + p.price + "</td>";
 				trItem += "<td>" + p.count + "</td>";
-				trItem += `<td><button onclick="deleteById(${p.id})">삭제</button></td>`;
+				trItem += `<td><button onclick="deleteById(${p.id})" class="waves-effect waves-light btn">삭제</button></td>`;
 				trItem += "</tr>";
 
 				tbodyItem.append(trItem);

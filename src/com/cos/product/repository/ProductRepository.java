@@ -26,8 +26,6 @@ public class ProductRepository {
 	private ResultSet rs;
 	
 
-	
-	
 	public int deleteById(int id) {
 		final String SQL = "DELETE FROM product WHERE id = ?";
 		
@@ -40,6 +38,8 @@ public class ProductRepository {
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			DBConn.close(conn,pstmt);
 		}
 		
 		return -1;
@@ -85,6 +85,8 @@ public class ProductRepository {
 			return products;
 		} catch (Exception e) {
 			e.printStackTrace();
+		}  finally {
+			DBConn.close(conn,pstmt,rs);
 		}
 		return null;
 	}
